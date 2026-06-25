@@ -1,0 +1,1946 @@
+/* ==========================================================================
+   LENSA SHAFA - SISTEM DESAIN & STYLE PREMIUM V3
+   Tema: Luxury Monochrome Photography Portfolio (Sinematik & Elegan)
+   ========================================================================== */
+
+/* 1. VARIABEL & DESAIN SISTEM */
+:root {
+    /* Palet Warna Monokrom */
+    --color-white: #FFFFFF;
+    --color-soft-white: #F8F8F8;
+    --color-light-gray: #EFEFEF;
+    --color-medium-gray: #BDBDBD;
+    --color-dark-gray: #222222;
+    --color-black: #0A0A0A;
+    
+    /* Warna Fungsional */
+    --color-bg-primary: var(--color-black); /* Gelap total untuk kesan sinematik */
+    --color-bg-secondary: #111111;
+    --color-bg-dark: var(--color-black);
+    --color-text-primary: var(--color-white);
+    --color-text-secondary: rgba(255, 255, 255, 0.7);
+    --color-text-muted: var(--color-medium-gray);
+    --color-border: rgba(255, 255, 255, 0.1);
+    
+    /* Tipografi */
+    --font-brand: 'Cinzel', serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    
+    /* Transisi Lambat (Cinematic Luxury) */
+    --transition-smooth: all 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-medium: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    
+    /* Layout */
+    --container-width: 1320px;
+    --header-height: 130px; /* Header lebar mewah */
+}
+
+/* 2. RESET UTAMA */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: auto; /* Dikelola oleh Lenis Smooth Scroll */
+    font-size: 16px;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.75;
+    overflow-x: hidden;
+}
+
+body.scroll-locked {
+    overflow: hidden;
+    height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+/* 3. TIPOGRAFI & UTILITAS */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.grid {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.section-padding {
+    padding: 10rem 0;
+}
+
+.section-border-top {
+    border-top: 1px solid var(--color-border);
+}
+
+.section-badge {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1.75rem;
+    color: var(--color-white);
+}
+
+.section-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 680px;
+    margin: 0 auto 5rem;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+.section-header {
+    margin-bottom: 4rem;
+}
+
+/* 4. VISUAL BACKGROUNDS SYSTEM DENGAN EFEK KEN BURNS */
+.section-with-bg {
+    position: relative;
+    color: var(--color-white);
+    background-color: var(--color-black);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.section-bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+}
+
+/* PENTING (Issue 3): Mengunci posisi absolute background image agar tidak menyebabkan visual bug di sisi kiri */
+.section-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.25; /* Halus, estetika gelap sinematik */
+    z-index: -2;
+}
+
+/* Parallax slow-zoom Ken Burns */
+.ken-burns {
+    animation: kenBurnsAnimation 30s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes kenBurnsAnimation {
+    0% { transform: scale(1.00); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1.00); }
+}
+
+.section-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 50%, rgba(10, 10, 10, 0.98) 100%);
+    z-index: -1;
+}
+
+.section-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* 5. TOMBOL BULAT PILL-SHAPED LUXURY (Issue 9) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.75rem;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-radius: 50px; /* Pill-shaped */
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.6s ease, border-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: 1px solid transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--color-white);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25); /* Glow shadow */
+}
+
+.btn-outline-white {
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.35);
+    color: var(--color-white);
+}
+
+.btn-outline-white:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-white);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+/* Luxury & Glow modifier classes */
+.btn-glow {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15), 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: btnGlowPulse 3s ease-in-out infinite;
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.35), 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes btnGlowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.15), 0 4px 15px rgba(0, 0, 0, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.3), 0 8px 25px rgba(0, 0, 0, 0.4); }
+}
+
+.btn-luxury {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-luxury::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-luxury:hover::after {
+    left: 130%;
+}
+
+/* 6. SPLASH SCREEN (TIRET HITAM SINEMATIK - Issue 1) */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1), visibility 1.5s;
+    visibility: visible;
+    overflow: hidden;
+}
+
+#splash-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(30,30,30,0.4) 0%, rgba(10,10,10,0.95) 100%);
+    z-index: 1;
+}
+
+.splash-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 2.5rem;
+    transform: translateY(0);
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#splash-screen.fade-out .splash-content {
+    transform: translateY(-40px);
+}
+
+.splash-logo-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Logo PNG putih-di-atas-hitam: mix-blend-mode:screen membuat bg hitam transparan */
+.splash-logo-img {
+    height: 180px;
+    width: auto;
+    max-width: 320px;
+    object-fit: contain;
+    border-radius: 0;
+    border: none;
+    opacity: 0;
+    background-color: transparent;
+    mix-blend-mode: screen; /* Hilangkan background hitam, tampilkan logo putih */
+    animation: splashFadeIn 1.8s forwards 0.2s;
+}
+
+.splash-title {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    font-weight: 400;
+    opacity: 0;
+    animation: splashFadeInBlur 1.8s forwards 0.5s;
+}
+
+.splash-sub {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--color-medium-gray);
+    letter-spacing: 0.15em;
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: splashFadeInBlur 1.8s forwards 0.8s;
+}
+
+#splash-screen #btn-start {
+    opacity: 0;
+    animation: splashFadeIn 1.8s forwards 1.1s;
+}
+
+@keyframes splashFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes splashFadeInBlur {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* 7. FLOATING AUDIO CONTROL & SOUND WAVE */
+.music-toggle-btn {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    background-color: rgba(10, 10, 10, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1.5rem;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.05);
+    z-index: 950;
+    transition: var(--transition-medium);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--color-white);
+}
+
+.music-toggle-btn:hover {
+    transform: translateY(-3px);
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-white);
+}
+
+.music-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    width: 20px;
+    height: 14px;
+}
+
+.music-bars .bar {
+    width: 2.5px;
+    height: 4px;
+    background-color: currentColor;
+    transition: height 0.3s ease;
+}
+
+/* Animasi Equalizer */
+.music-toggle-btn.playing .music-bars .bar:nth-child(1) { animation: soundDance 0.6s infinite alternate; }
+.music-toggle-btn.playing .music-bars .bar:nth-child(2) { animation: soundDance 0.8s infinite alternate 0.15s; }
+.music-toggle-btn.playing .music-bars .bar:nth-child(3) { animation: soundDance 0.5s infinite alternate 0.3s; }
+.music-toggle-btn.playing .music-bars .bar:nth-child(4) { animation: soundDance 0.7s infinite alternate 0.05s; }
+
+@keyframes soundDance {
+    0% { height: 3px; }
+    100% { height: 14px; }
+}
+
+.music-state-text {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.music-tooltip {
+    position: absolute;
+    right: 0;
+    bottom: 4rem;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: var(--transition-fast);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.music-toggle-btn:hover .music-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 8. HEADER DENGAN LOGO DI TENGAH LUXURY (Issue 2) */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    z-index: 1000;
+    transition: var(--transition-medium);
+}
+
+.main-header.scrolled {
+    height: 100px;
+    background-color: rgba(10, 10, 10, 0.96);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 0.5rem;
+    position: relative;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0.5rem 2rem;
+}
+
+/* Logo ditempatkan di tengah, dibuat melingkar premium (Issue 2) */
+.logo-link {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.logo-img {
+    height: 44px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+    mix-blend-mode: screen; /* Bg hitam hilang, logo putih tetap tampil */
+    transition: var(--transition-medium);
+}
+
+.main-header.scrolled .logo-img {
+    height: 38px;
+}
+
+.logo-text {
+    display: none;
+}
+
+/* Menu Navigasi Tengah di Desktop */
+.main-nav {
+    display: none; /* Mobile first */
+    width: 100%;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.25rem;
+}
+
+.nav-link {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    position: relative;
+    padding: 0.4rem 0;
+    transition: var(--transition-fast);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--color-white);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: var(--color-white);
+    transition: var(--transition-fast);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* Hubungi Kami CTA berada di Kanan Header */
+.header-cta {
+    display: none; /* Tersembunyi di mobile */
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btn-nav-cta {
+    padding: 0.65rem 1.75rem;
+    font-size: 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+    color: var(--color-white);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 50px;
+}
+
+.btn-nav-cta:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-white);
+}
+
+/* Hamburger Mobile Toggle Circle (Issue 6 & 8) */
+.mobile-nav-toggle {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    z-index: 1100;
+    position: absolute;
+    right: 1.5rem;
+}
+
+.mobile-nav-toggle:hover {
+    transform: scale(1.08);
+    background-color: var(--color-white);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35), 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.hamburger {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background-color: var(--color-black);
+    position: relative;
+    transition: var(--transition-fast);
+}
+
+.hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 1.5px;
+    background-color: var(--color-black);
+    transition: var(--transition-fast);
+}
+
+.hamburger::before { top: -6px; }
+.hamburger::after { top: 6px; }
+
+/* hamburger open state */
+.mobile-nav-toggle.open .hamburger {
+    background-color: transparent;
+}
+
+.mobile-nav-toggle.open .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.mobile-nav-toggle.open .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+/* 9. SECTION 1 – HERO SECTION (Cinematic layout with collage - Issue 6) */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    color: var(--color-white);
+    overflow: hidden;
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.hero-grid-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-meta {
+    font-size: 0.8125rem;
+    letter-spacing: 0.45em;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--color-medium-gray);
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 2.75rem;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 2rem;
+    color: var(--color-white);
+}
+
+.hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+/* Foreground Collage (Issue 6) */
+.hero-collage {
+    position: relative;
+    height: 240px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    overflow: hidden; /* Cegah foto terotasi melewati batas container */
+    padding: 0 10px; /* Buffer agar rotasi tidak terpotong */
+}
+
+.collage-img-wrapper {
+    position: absolute;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: var(--color-black);
+}
+
+.collage-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.collage-img-wrapper.img-1 {
+    width: 120px;
+    height: 160px;
+    left: 20px;
+    top: 10px;
+    transform: rotate(-4deg); /* Rotasi lebih kecil agar tidak overflow */
+    z-index: 2;
+}
+
+.collage-img-wrapper.img-2 {
+    width: 110px;
+    height: 150px;
+    right: 20px;
+    bottom: 10px;
+    transform: rotate(5deg); /* Rotasi lebih kecil agar tidak overflow */
+    z-index: 1;
+}
+
+.hero-collage:hover .collage-img-wrapper.img-1 {
+    transform: rotate(-3deg) translateY(-8px) scale(1.02);
+    z-index: 3;
+}
+
+.hero-collage:hover .collage-img-wrapper.img-2 {
+    transform: rotate(4deg) translateY(-8px) scale(1.02);
+}
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0.6;
+}
+
+.hero-scroll-indicator .mouse-icon {
+    width: 22px;
+    height: 36px;
+    border: 1px solid var(--color-white);
+    border-radius: 12px;
+    position: relative;
+}
+
+.hero-scroll-indicator .mouse-icon .wheel {
+    width: 3px;
+    height: 8px;
+    background-color: var(--color-white);
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: mouseScrollAnim 1.8s infinite;
+}
+
+@keyframes mouseScrollAnim {
+    0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+    50% { transform: translateX(-50%) translateY(8px); opacity: 0.4; }
+    100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+.scroll-text {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* 10. SECTION 2 – TENTANG KAMI (TEXT | PHOTO) */
+.about-section {
+    background-color: var(--color-black);
+}
+
+.about-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-desc-large {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    color: var(--color-white);
+    font-weight: 400;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.about-text {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.about-text strong {
+    color: var(--color-white);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.why-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Visual Frame Premium (Issue 4) */
+.premium-image-frame {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    padding: 1.5rem;
+}
+
+.about-fg-image, .why-fg-image, .contact-fg-image {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-image-frame:hover img {
+    transform: scale(1.02);
+}
+
+.frame-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 85%;
+    height: 85%;
+    border: 1.5px solid var(--color-white);
+    border-radius: 8px;
+    z-index: 1;
+    transform: translate(35px, 35px);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.premium-image-frame:hover .frame-border {
+    transform: translate(25px, 25px);
+}
+
+/* 11. SECTION 3 – MENGAPA MEMILIH LENSA SHAFA (PHOTO | TEXT) */
+.why-section {
+    background-color: var(--color-bg-secondary);
+}
+
+.why-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-2-col-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.feature-card {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2rem 1.75rem;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+}
+
+.card-icon {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.25rem;
+    transition: var(--transition-medium);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    background-color: var(--color-white);
+    border-color: var(--color-white);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.feature-card:hover .card-icon {
+    color: var(--color-black);
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--color-white);
+    margin-bottom: 0.65rem;
+    font-weight: 400;
+    transition: var(--transition-fast);
+}
+
+.card-desc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    line-height: 1.6;
+    transition: var(--transition-fast);
+}
+
+.feature-card:hover .card-title {
+    color: var(--color-black);
+}
+
+.feature-card:hover .card-desc {
+    color: var(--color-dark-gray);
+}
+
+/* 12. SECTION 4 – PORTOFOLIO UNGGULAN (EDITORIAL GRID) */
+.featured-portfolio-section {
+    background-color: var(--color-black);
+}
+
+.editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.editorial-item {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: var(--color-black);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.editorial-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+}
+
+.editorial-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.5s ease;
+}
+
+.editorial-item:hover .editorial-img {
+    transform: scale(1.05);
+    filter: brightness(0.85);
+}
+
+.editorial-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.1) 60%, rgba(10, 10, 10, 0.4) 100%);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    transition: var(--transition-medium);
+    z-index: 5;
+}
+
+.editorial-item:hover .editorial-overlay {
+    opacity: 1;
+}
+
+.editorial-info {
+    transform: translateY(20px);
+    transition: var(--transition-medium);
+}
+
+.editorial-item:hover .editorial-info {
+    transform: translateY(0);
+}
+
+.editorial-category {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-medium-gray);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.editorial-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    color: var(--color-white);
+    font-weight: 400;
+}
+
+.editorial-zoom-btn {
+    align-self: flex-end;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.8);
+    opacity: 0;
+    transition: var(--transition-medium);
+}
+
+.editorial-item:hover .editorial-zoom-btn {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* 13. SECTION 5 – GALERI DOKUMENTASI */
+.gallery-section {
+    background-color: var(--color-bg-secondary);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.gallery-card-item {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: var(--color-black);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.gallery-img-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), filter 1.5s ease;
+}
+
+.gallery-card-item:hover .gallery-img {
+    transform: scale(1.04);
+}
+
+.gallery-hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-medium);
+}
+
+.gallery-card-item:hover .gallery-hover-overlay {
+    opacity: 1;
+}
+
+.view-icon-span {
+    color: var(--color-white);
+    font-size: 2rem;
+    font-weight: 300;
+    transform: scale(0.5);
+    opacity: 0;
+    transition: var(--transition-medium);
+}
+
+.gallery-card-item:hover .view-icon-span {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* 14. SECTION 6 – CALL TO ACTION (Integrated Layout: TEXT | PHOTO) */
+.cta-section {
+    position: relative;
+    color: var(--color-white);
+    background-color: var(--color-black);
+}
+
+.cta-text-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.cta-title {
+    font-family: var(--font-heading);
+    font-size: 2.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.cta-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--color-medium-gray);
+    line-height: 1.7;
+}
+
+.cta-visual-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cta-image-wrapper {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta-fg-image {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-image-wrapper:hover .cta-fg-image {
+    transform: scale(1.03);
+}
+
+.cta-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.btn-large-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid var(--color-white);
+    padding: 1.25rem 3rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.12);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.btn-large-cta:hover {
+    background-color: transparent;
+    color: var(--color-white);
+    border-color: var(--color-white);
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 35px rgba(255, 255, 255, 0.25);
+}
+
+.cta-arrow {
+    transition: transform 0.4s ease;
+    flex-shrink: 0;
+}
+
+.btn-large-cta:hover .cta-arrow {
+    transform: translateX(6px);
+}
+
+/* 15. SECTION 7 – KONTAK & FOOTER */
+.contact-section {
+    background-color: var(--color-bg-secondary);
+}
+
+.contact-visual-col {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.whatsapp-large-icon {
+    flex-shrink: 0;
+}
+
+.contact-content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.contact-notice {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+.contact-cta-wrapper {
+    margin-bottom: 4rem;
+}
+
+.btn-whatsapp-large {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid var(--color-white);
+    padding: 1.15rem 3.25rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    gap: 0.75rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.btn-whatsapp-large:hover {
+    background-color: transparent;
+    color: var(--color-white);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px) scale(1.03);
+}
+
+.contact-info-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: 100%;
+    border-top: 1px solid var(--color-border);
+    padding-top: 3rem;
+}
+
+.info-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+.info-link:hover {
+    color: var(--color-white);
+}
+
+.info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+}
+
+/* Footer Copyright */
+.footer-bottom {
+    background-color: var(--color-black);
+    border-top: 1px solid var(--color-border);
+    padding: 4rem 0;
+}
+
+.footer-brand {
+    font-family: var(--font-brand);
+    font-size: 1.5rem;
+    letter-spacing: 0.25em;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-white);
+    text-transform: uppercase;
+}
+
+.copyright {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.05em;
+    font-weight: 400;
+}
+
+/* 16. LIGHTBOX MODAL GALLERY */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, visibility 0.5s;
+    visibility: hidden;
+}
+
+.lightbox-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.lightbox-content {
+    max-width: 85%;
+    max-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#lightbox-img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    transform: scale(0.95);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #000;
+}
+
+.lightbox-modal.active #lightbox-img {
+    transform: scale(1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-size: 3rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: var(--transition-fast);
+    z-index: 2100;
+}
+
+.lightbox-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-white);
+    cursor: pointer;
+    opacity: 0.5;
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 50%;
+    transition: var(--transition-medium);
+    z-index: 2100;
+}
+
+.lightbox-prev:hover, .lightbox-next:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-prev {
+    left: 2rem;
+}
+
+.lightbox-next {
+    right: 2rem;
+}
+
+/* 17. SISTEM SCROLL REVEAL LAMBAT & SINEMATIK (Issue 10) */
+.reveal-on-scroll {
+    opacity: 0;
+    filter: blur(20px); /* blur reveal lambat */
+    transform: translateY(100px); /* Larger transition slide up */
+    transition: opacity 2.5s cubic-bezier(0.16, 1, 0.3, 1), transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), filter 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Efek Beda Arah */
+.reveal-on-scroll.fade-up {
+    transform: translateY(100px);
+}
+
+.reveal-on-scroll.fade-left {
+    transform: translateX(-100px);
+}
+
+.reveal-on-scroll.fade-right {
+    transform: translateX(100px);
+}
+
+/* State Aktif */
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+    filter: blur(0);
+}
+
+/* Stagger delay sekuensial yang diperlambat */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(15px);
+    transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1), filter 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visible .reveal-item:nth-child(1), .visible .reveal-item.fade-in-up { transition-delay: 0.3s; opacity: 1; transform: translateY(0); filter: blur(0); }
+.visible .reveal-item:nth-child(2), .visible .reveal-item.fade-in-up-delay-1 { transition-delay: 0.7s; opacity: 1; transform: translateY(0); filter: blur(0); }
+.visible .reveal-item:nth-child(3), .visible .reveal-item.fade-in-up-delay-2 { transition-delay: 1.1s; opacity: 1; transform: translateY(0); filter: blur(0); }
+.visible .reveal-item:nth-child(4), .visible .reveal-item.fade-in-up-delay-3 { transition-delay: 1.5s; opacity: 1; transform: translateY(0); filter: blur(0); }
+
+/* 18. RESPONSIVITAS (MEDIA QUERIES) */
+
+/* Tablet & Up (min-width: 768px) */
+@media screen and (min-width: 768px) {
+    .grid-2-col {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        gap: 4.5rem;
+    }
+    
+    .grid-2-col-reverse-mobile {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        gap: 4.5rem;
+    }
+
+    .grid-4-col {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Hero Split Layout */
+    .hero-grid-split {
+        grid-template-columns: 1.1fr 0.9fr;
+        text-align: left;
+        gap: 4rem;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.15rem;
+        margin-left: 0;
+    }
+    
+    .hero-actions {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    .hero-collage {
+        height: 380px;
+        max-width: 100%;
+    }
+    
+    .collage-img-wrapper.img-1 {
+        width: 180px;
+        height: 250px;
+        left: 0;
+        top: 20px;
+    }
+
+    .collage-img-wrapper.img-2 {
+        width: 170px;
+        height: 235px;
+        right: 10px;
+        bottom: 20px;
+    }
+    
+    /* Editorial Portofolio */
+    .editorial-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Galeri */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Kontak Info */
+    .contact-info-grid {
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+    }
+    
+    /* Navigasi Header Desktop */
+    .header-cta {
+        display: block;
+    }
+    
+    .main-nav {
+        display: flex;
+    }
+    
+    .mobile-nav-toggle {
+        display: none;
+    }
+}
+
+/* Desktop & Up (min-width: 1024px) { */
+@media screen and (min-width: 1024px) {
+    .section-padding {
+        padding: 12rem 0;
+    }
+    
+    .section-title {
+        font-size: 3.75rem;
+    }
+    
+    .grid-4-col {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .hero-title {
+        font-size: 4.25rem;
+    }
+    
+    .hero-collage {
+        height: 420px;
+    }
+    
+    .collage-img-wrapper.img-1 {
+        width: 210px;
+        height: 290px;
+    }
+
+    .collage-img-wrapper.img-2 {
+        width: 190px;
+        height: 260px;
+        right: 20px;
+    }
+
+    /* Portofolio Asymmetric Layout */
+    .editorial-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 340px;
+        gap: 2.5rem;
+    }
+    
+    .editorial-img-wrapper {
+        aspect-ratio: auto;
+    }
+    
+    .editorial-item.item-large {
+        grid-row: span 2;
+    }
+    
+    .editorial-item.item-wide {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    /* Galeri Grid (4 Kolom) */
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* KUSTOMISASI DESAIN MOBILE-FIRST (Pencapaian Balance & Compact - Issue 7) */
+@media screen and (max-width: 767px) {
+    /* Header layout mobile */
+    .main-header {
+        height: 70px;
+    }
+    
+    .main-header.scrolled {
+        height: 70px;
+    }
+    
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1.5rem;
+        gap: 0;
+    }
+    
+    .logo-link {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 0;
+    }
+    
+    .logo-img {
+        height: 46px;
+        max-width: 120px;
+    }
+    
+    /* Mobile Drawer (Slide Down + Blur Reveal - Issue 8) */
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        z-index: 1050;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transform: translateY(-100%); /* Hardware-accelerated slide */
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    }
+    
+    .main-nav.open {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 2.5rem;
+        align-items: center;
+    }
+    
+    .nav-link {
+        font-size: 1.25rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+    }
+
+    /* Compact Gaps & Padding untuk Mengurangi Scrolling Berlebihan */
+    .section-padding {
+        padding: 5rem 0;
+    }
+    
+    .section-title {
+        font-size: 2.25rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 3rem;
+        padding: 0 0.5rem;
+    }
+    
+    .grid-2-col {
+        gap: 2.5rem;
+    }
+    
+    .grid-2-col-reverse-mobile {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 2.5rem;
+    }
+    
+    /* 2-Column Compact Layout untuk Fitur Cards */
+    .grid-2-col-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem 1rem;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .feature-card .card-icon {
+        margin-bottom: 0.75rem;
+    }
+    
+    .card-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .card-desc {
+        font-size: 0.75rem;
+        line-height: 1.45;
+    }
+    
+    /* 2-Column Compact Layout untuk Portofolio Unggulan */
+    .editorial-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    /* Custom Asymmetric Rhythm untuk Mobile */
+    .editorial-item.item-large {
+        grid-column: span 2;
+        aspect-ratio: 4/3;
+    }
+    
+    .editorial-item.item-wide {
+        grid-column: span 2;
+        aspect-ratio: 16/10;
+    }
+    
+    .editorial-overlay {
+        padding: 1.25rem;
+    }
+    
+    .editorial-title {
+        font-size: 1.15rem;
+    }
+    
+    /* 2-Column Grid untuk Galeri Dokumentasi Lengkap */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .gallery-hover-overlay {
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+    
+    /* Lightbox di mobile */
+    .lightbox-prev, .lightbox-next {
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+    .lightbox-prev {
+        left: 0.5rem;
+    }
+    .lightbox-next {
+        right: 0.5rem;
+    }
+    
+    /* Hero mobile sizing */
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 4rem;
+    }
+    .hero-content-wrapper {
+        margin-top: 100px; /* Naikan agar DOKUMENTASI UMROH PREMIUM tidak tertutup header 70px */
+    }
+    .hero-meta {
+        margin-bottom: 1rem;
+        font-size: 0.7rem; /* Lebih kecil agar tidak wrap di layar sempit */
+        letter-spacing: 0.3em; /* Kurangi letter-spacing agar tidak terpotong */
+    }
+    .hero-title {
+        font-size: 2.1rem;
+        margin-bottom: 1.25rem;
+    }
+    .hero-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+    .hero-actions {
+        padding: 0 1rem;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .hero-actions .btn {
+        width: 100%;
+    }
+    /* Collage mobile - ukuran lebih kecil, no overflow */
+    .hero-visual-col {
+        overflow: hidden; /* Kunci overflow foto ke luar layar */
+        padding: 0 1rem; /* Ruang aman dari tepi layar */
+    }
+    .hero-collage {
+        height: 220px;
+        max-width: 260px;
+        overflow: visible; /* Visual collage boleh sedikit keluar dari kotak internal */
+        padding: 0;
+    }
+    .collage-img-wrapper.img-1 {
+        width: 115px;
+        height: 155px;
+        left: 10px;
+        top: 5px;
+        transform: rotate(-4deg);
+    }
+    .collage-img-wrapper.img-2 {
+        width: 105px;
+        height: 140px;
+        right: 10px;
+        bottom: 5px;
+        transform: rotate(4deg); /* Rotasi kecil = tidak overflow */
+    }
+    
+    /* CTA mobile padding */
+    .cta-section {
+        padding: 6rem 0;
+    }
+    .cta-title {
+        font-size: 2rem;
+    }
+    .cta-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 2.5rem;
+    }
+    .cta-image-wrapper {
+        margin-top: 1.5rem;
+    }
+    
+    /* Kontak mobile padding */
+    .contact-cta-wrapper {
+        margin-bottom: 3rem;
+    }
+    .contact-info-grid {
+        align-items: center;
+        padding-top: 2rem;
+    }
+}
