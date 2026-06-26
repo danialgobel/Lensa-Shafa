@@ -3,39 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LENSA SHAFA - Vendor dokumentasi video sinematik umroh profesional. Abadikan perjalanan ibadah Anda dalam film sinematik berkualitas premium dengan color grading mewah dan storytelling yang mendalam.">
-    <title>LENSA SHAFA | Vendor Video Sinematik Umroh Premium</title>
+    <meta name="description" content="LENSA SHAFA - Vendor video sinematik & foto profesional Umroh. Abadikan perjalanan ibadah dalam film sinematik 4K dengan color grading premium, storytelling mendalam, dan foto profesional berkualitas tinggi.">
+    <title>LENSA SHAFA | Vendor Video Sinematik & Foto Umroh Premium</title>
     
-    <!-- Google Fonts: Cinzel (Brand/Headers), Playfair Display (Serif Elegance) & Inter (Clean Sans-Serif Body) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Lenis Smooth Scroll CSS -->
     <style>
-        html.lenis, html.lenis body {
-            height: auto;
-        }
-        .lenis-smooth {
-            scroll-behavior: auto !important;
-        }
-        .lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-        .lenis-stopped {
-            overflow: hidden;
-        }
-        .lenis-scrolling iframe {
-            pointer-events: none;
-        }
+        html.lenis, html.lenis body { height: auto; }
+        .lenis-smooth { scroll-behavior: auto !important; }
+        .lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis-stopped { overflow: hidden; }
+        .lenis-scrolling iframe { pointer-events: none; }
     </style>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
-    <!-- Splash Screen (Cinematic Welcome Overlay) -->
+    <!-- Splash Screen -->
     <div id="splash-screen" class="splash-active" role="dialog" aria-modal="true" aria-label="Selamat Datang">
         <div class="splash-bg"></div>
         <div class="splash-content text-center">
@@ -44,15 +34,14 @@
                 <h1 class="splash-logo-fallback" style="display:none;">LENSA SHAFA</h1>
             </div>
             <h2 class="splash-title">Selamat Datang di LENSA SHAFA</h2>
-            <p class="splash-sub">Film Sinematik Perjalanan Ibadah Anda</p>
+            <p class="splash-sub">Film Sinematik & Foto Profesional Perjalanan Ibadah Anda</p>
             <button id="btn-start" class="btn btn-outline-white btn-glow">Klik Untuk Memulai</button>
         </div>
     </div>
 
-    <!-- Background Audio Element -->
+    <!-- Background Audio -->
     <audio id="bg-music" loop preload="auto">
         <source src="lensa-music.mp3" type="audio/mpeg">
-        Browser Anda tidak mendukung pemutar audio.
     </audio>
 
     <!-- Floating Audio Control -->
@@ -67,30 +56,26 @@
         <span class="music-tooltip">Putar Musik</span>
     </button>
 
-    <!-- Sticky Header & Navigation -->
+    <!-- Sticky Header -->
     <header class="main-header">
         <div class="header-container">
             <a href="#beranda" class="logo-link" aria-label="Beranda Lensa Shafa">
                 <img src="logo-lensa.png" alt="Logo Lensa Shafa" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <span class="logo-text" style="display:none;">LENSA SHAFA</span>
             </a>
-            
-            <!-- Mobile Menu Toggle Button -->
             <button class="mobile-nav-toggle" aria-label="Buka Menu Navigasi" aria-expanded="false">
                 <span class="hamburger"></span>
             </button>
-            
             <nav class="main-nav">
                 <ul class="nav-links">
                     <li><a href="#beranda" class="nav-link active">Beranda</a></li>
                     <li><a href="#tentang" class="nav-link">Tentang Kami</a></li>
-                    <li><a href="#mengapa" class="nav-link">Mengapa Kami</a></li>
-                    <li><a href="#portofolio-unggulan" class="nav-link">Portofolio</a></li>
+                    <li><a href="#video-showcase" class="nav-link">Video</a></li>
+                    <li><a href="#pricelist" class="nav-link">Harga</a></li>
                     <li><a href="#galeri-semua" class="nav-link">Galeri</a></li>
                     <li><a href="#kontak" class="nav-link">Kontak</a></li>
                 </ul>
             </nav>
-            
             <div class="header-cta">
                 <a href="https://wa.me/6287870455572" target="_blank" rel="noopener noreferrer" class="btn btn-nav-cta">
                     <svg class="icon-whatsapp" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
@@ -102,58 +87,50 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
-        
-        <!-- SECTION 1 – HERO (Cinematic layered hero with visual collage) -->
+        <!-- SECTION 1 – HERO -->
         <section id="beranda" class="hero-section section-with-bg">
             <div class="section-bg-wrapper">
-                <img src="background-lensa.jpg" alt="Latar Belakang Lensa Shafa" class="section-bg-image ken-burns" onerror="this.parentElement.classList.add('no-image');">
-                <div class="section-overlay"></div>
+                <img src="lensa-2.jpg" alt="Background Hero Lensa Shafa" class="section-bg-image ken-burns" loading="eager">
+                <div class="section-overlay hero-overlay"></div>
             </div>
             <div class="hero-content-wrapper container section-content">
                 <div class="hero-grid-split">
                     <div class="hero-text-col">
-                        <div class="hero-meta reveal-item fade-in-up">VIDEO SINEMATIK UMROH PREMIUM</div>
+                        <div class="hero-meta reveal-item fade-in-up">VIDEO SINEMATIK & FOTO UMROH PREMIUM</div>
                         <h1 class="hero-title reveal-item fade-in-up-delay-1">Kisah Ibadah Anda, Diabadikan dalam Sinema</h1>
-                        <p class="hero-subtitle reveal-item fade-in-up-delay-2">Vendor Video Sinematik Umroh Profesional — Kami Merekam Setiap Perjalanan Spiritual Anda Seperti Sebuah Film Berkelas Dunia.</p>
+                        <p class="hero-subtitle reveal-item fade-in-up-delay-2">Vendor Video Sinematik & Foto Profesional Umroh — Kami Merekam Setiap Perjalanan Spiritual Anda Seperti Sebuah Film Berkelas Dunia.</p>
                         <div class="hero-actions reveal-item fade-in-up-delay-3">
-                            <a href="#portofolio-unggulan" class="btn btn-primary btn-luxury">Lihat Karya Kami</a>
+                            <a href="#video-showcase" class="btn btn-primary btn-luxury">Lihat Karya Video</a>
                             <a href="https://wa.me/6287870455572" target="_blank" rel="noopener noreferrer" class="btn btn-outline-white">
-                                <svg class="icon-whatsapp-btn" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="margin-right: 8px; vertical-align: middle;">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="margin-right: 8px; vertical-align: middle;">
                                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.966a9.78 9.78 0 0 0-6.924-2.879c-5.443 0-9.866 4.372-9.87 9.802 0 1.714.452 3.39 1.312 4.869l-.29 1.058-.91 3.326 3.423-.889.98-.246zm11.196-7.291c-.29-.144-1.712-.835-1.977-.93-.264-.096-.456-.144-.648.144-.192.288-.744.93-.912 1.122-.168.192-.336.216-.625.072-.288-.144-1.218-.444-2.319-1.414-.857-.754-1.435-1.686-1.603-1.973-.168-.288-.018-.444.126-.587.13-.13.29-.336.433-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.648-1.536-.888-2.112-.233-.561-.47-.485-.648-.494-.168-.008-.36-.01-.552-.01-.192 0-.504.072-.768.36-.264.288-1.008.972-1.008 2.376 0 1.404 1.032 2.76 1.176 2.952.144.192 2.032 3.06 4.921 4.29.687.292 1.224.467 1.643.599.69.217 1.32.187 1.817.113.553-.082 1.712-.689 1.952-1.354.24-.664.24-1.233.168-1.354-.072-.12-.264-.192-.552-.336z"/>
                                 </svg>
                                 Konsultasi Gratis
                             </a>
                         </div>
                     </div>
-                    
-                    <!-- Visual Collage Foreground (Issue 6) -->
-                    <div class="hero-visual-col reveal-item fade-in-up-delay-2">
+                    <div class="hero-visual-col reveal-item fade-in-right">
                         <div class="hero-collage">
                             <div class="collage-img-wrapper img-1">
-                                <img src="lensa-1.jpg" alt="Dokumentasi Hero 1" class="collage-img">
+                                <img src="lensa-3.jpg" alt="Momen Umroh 1" class="collage-img">
                             </div>
                             <div class="collage-img-wrapper img-2">
-                                <img src="lensa-3.jpg" alt="Dokumentasi Hero 2" class="collage-img">
+                                <img src="lensa-6.jpg" alt="Momen Umroh 2" class="collage-img">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="hero-scroll-indicator reveal-item fade-in-up-delay-3">
-                <div class="mouse-icon">
-                    <span class="wheel"></span>
-                </div>
-                <span class="scroll-text">Scroll ke Bawah</span>
+            <div class="hero-scroll-indicator">
+                <div class="mouse-icon"><div class="wheel"></div></div>
+                <span class="scroll-text">Scroll</span>
             </div>
         </section>
 
-        <!-- SECTION 2 – TENTANG KAMI (Integrated Layout: TEXT | PHOTO) -->
+        <!-- SECTION 2 – TENTANG KAMI -->
         <section id="tentang" class="about-section section-padding section-with-bg">
-            <div class="section-bg-wrapper">
-                <div class="section-overlay"></div>
-            </div>
+            <div class="section-bg-wrapper"><div class="section-overlay"></div></div>
             <div class="container section-content">
                 <div class="grid grid-2-col">
                     <div class="about-intro reveal-on-scroll fade-left">
@@ -163,17 +140,15 @@
                             Setiap langkah di Tanah Suci adalah babak paling sakral dalam hidup Anda. Kami merekamnya seperti seorang sineas merekam mahakaryanya.
                         </p>
                         <p class="about-text" style="margin-top: 2rem;">
-                            <strong>LENSA SHAFA</strong> adalah vendor video sinematik Umroh profesional yang menghadirkan kualitas produksi setara film layar lebar. Kami tidak sekadar merekam — kami menceritakan kisah keimanan Anda melalui gambar bergerak yang indah, penuh emosi, dan bernilai abadi.
+                            <strong>LENSA SHAFA</strong> adalah vendor video sinematik & foto profesional Umroh yang menghadirkan kualitas produksi setara film layar lebar. Layanan utama kami adalah <strong>video cinematic 4K</strong> — namun kami juga menyediakan <strong>sesi foto profesional</strong> di spot-spot viral Tanah Suci dengan arahan gaya yang elegan.
                         </p>
                         <p class="about-text">
-                            Dengan kamera sinematik 4K, teknik color grading premium, dan kemampuan storytelling visual yang mendalam, setiap video kami dirancang untuk membuat Anda kembali merasakan kekhusyukan dan keagungan perjalanan spiritual tersebut — kapan pun Anda menontonnya.
+                            Dengan kamera sinematik 4K, color grading premium, stabilizer profesional, dan kemampuan storytelling visual yang mendalam, setiap karya kami dirancang untuk membuat Anda kembali merasakan kekhusyukan ibadah — kapan pun Anda menontonnya kembali.
                         </p>
                     </div>
-                    
-                    <!-- Foreground visible image integration (Issue 4) -->
                     <div class="about-visual reveal-on-scroll fade-right">
                         <div class="premium-image-frame">
-                            <img src="lensa-2.jpg" alt="Dokumentasi Tentang Kami Lensa Shafa" class="about-fg-image">
+                            <img src="lensa-11.png" alt="Tentang Lensa Shafa" class="about-fg-image">
                             <div class="frame-border"></div>
                         </div>
                     </div>
@@ -181,80 +156,61 @@
             </div>
         </section>
 
-        <!-- SECTION 3 – MENGAPA MEMILIH LENSA SHAFA (Integrated Layout: PHOTO | TEXT) -->
+        <!-- SECTION 3 – MENGAPA MEMILIH -->
         <section id="mengapa" class="why-section section-padding section-with-bg">
-            <div class="section-bg-wrapper">
-                <div class="section-overlay"></div>
-            </div>
+            <div class="section-bg-wrapper"><div class="section-overlay"></div></div>
             <div class="container section-content">
                 <div class="grid grid-2-col-reverse-mobile">
-                    <!-- Foreground visible image integration -->
                     <div class="why-visual reveal-on-scroll fade-left">
                         <div class="premium-image-frame">
                             <img src="lensa-4.jpg" alt="Keunggulan Lensa Shafa" class="why-fg-image">
                             <div class="frame-border" style="transform: translate(-20px, 30px); left: auto; right: 0;"></div>
                         </div>
                     </div>
-                    
                     <div class="why-content reveal-on-scroll fade-right">
                         <span class="section-badge">KEUNGGULAN KAMI</span>
                         <h2 class="section-title">Mengapa Memilih LENSA SHAFA?</h2>
-                        <p class="section-subtitle" style="margin-left: 0; text-align: left; margin-bottom: 3rem;">Kami menghadirkan standar produksi video sinematik yang selama ini hanya ada di film-film profesional, kini untuk perjalanan ibadah Anda.</p>
-                        
+                        <p class="section-subtitle" style="margin-left: 0; text-align: left; margin-bottom: 3rem;">Standar produksi video sinematik profesional, kini hadir untuk perjalanan ibadah Anda.</p>
                         <div class="grid grid-2-col-cards">
-                            <!-- Card 1 -->
                             <div class="feature-card">
                                 <div class="card-icon">
-                                    <!-- Video Camera Icon -->
                                     <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
                                         <path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.362a1 1 0 0 1-1.447.894L15 14"/>
                                         <rect x="2" y="7" width="13" height="10" rx="2" ry="2"/>
                                     </svg>
                                 </div>
                                 <h3 class="card-title">Video 4K Sinematik</h3>
-                                <p class="card-desc">Resolusi ultra-tajam dengan komposisi sinema dan gerakan kamera yang halus bak film profesional.</p>
+                                <p class="card-desc">Resolusi ultra-tajam dengan gerakan kamera halus bak film profesional.</p>
                             </div>
-
-                            <!-- Card 2 -->
                             <div class="feature-card">
                                 <div class="card-icon">
-                                    <!-- Color Grading Icon -->
                                     <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 2a10 10 0 0 1 0 20"/>
-                                        <path d="M12 6v6l4 2"/>
+                                        <circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20"/><path d="M12 6v6l4 2"/>
                                     </svg>
                                 </div>
                                 <h3 class="card-title">Color Grading Premium</h3>
-                                <p class="card-desc">Sentuhan warna hangat dan sinematik yang menciptakan nuansa spiritual mendalam di setiap frame.</p>
+                                <p class="card-desc">Sentuhan warna hangat dan sinematik, nuansa spiritual di setiap frame.</p>
                             </div>
-
-                            <!-- Card 3 -->
                             <div class="feature-card">
                                 <div class="card-icon">
-                                    <!-- Storytelling / Film Icon -->
                                     <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <rect x="2" y="3" width="20" height="14" rx="2"/>
-                                        <path d="M8 21h8M12 17v4"/>
-                                        <path d="M9 9l2 2 4-4"/>
+                                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                        <circle cx="12" cy="13" r="4"/>
                                     </svg>
                                 </div>
-                                <h3 class="card-title">Visual Storytelling</h3>
-                                <p class="card-desc">Setiap video kami bercerita — bukan sekadar rekaman, tapi narasi visual perjalanan iman Anda.</p>
+                                <h3 class="card-title">Foto Profesional</h3>
+                                <p class="card-desc">Sesi foto di spot viral Haramain dengan arahan gaya dan hasil editing premium.</p>
                             </div>
-
-                            <!-- Card 4 -->
                             <div class="feature-card">
                                 <div class="card-icon">
-                                    <!-- Professional Team Icon -->
                                     <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
                                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                                         <circle cx="9" cy="7" r="4"/>
                                         <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
                                     </svg>
                                 </div>
-                                <h3 class="card-title">Tim Videografer</h3>
-                                <p class="card-desc">Videografer terlatih yang santun, memahami adab ibadah, dan profesional di lapangan.</p>
+                                <h3 class="card-title">Tim Profesional</h3>
+                                <p class="card-desc">Videografer & fotografer terlatih, santun, dan memahami adab ibadah.</p>
                             </div>
                         </div>
                     </div>
@@ -262,108 +218,68 @@
             </div>
         </section>
 
-        <!-- SECTION 4 – PORTOFOLIO UNGGULAN -->
-        <section id="portofolio-unggulan" class="featured-portfolio-section section-padding section-with-bg">
-            <div class="section-bg-wrapper">
-                <div class="section-overlay"></div>
-            </div>
+        <!-- SECTION 4 – VIDEO SHOWCASE (Lensa 1, 7, 9 sebagai cover video) -->
+        <section id="video-showcase" class="video-showcase-section section-padding section-with-bg">
+            <div class="section-bg-wrapper"><div class="section-overlay"></div></div>
             <div class="container section-content">
                 <div class="section-header text-center reveal-on-scroll fade-up">
-                    <span class="section-badge">KARYA PILIHAN</span>
-                    <h2 class="section-title">Portofolio Video Sinematik</h2>
-                    <p class="section-subtitle">Cuplikan frame terbaik dari produksi video Umroh kami — setiap gambar mewakili satu momen emosional yang berhasil kami abadikan dalam film.</p>
+                    <span class="section-badge">KARYA VIDEO</span>
+                    <h2 class="section-title">Video Sinematik Kami</h2>
+                    <p class="section-subtitle">Klik pada thumbnail di bawah untuk menonton video sinematik Umroh langsung dari karya terbaik kami.</p>
                 </div>
+                <div class="video-cards-grid reveal-on-scroll fade-up">
 
-                <!-- Editorial Masonry-style Asymmetric Grid (5 Selected Images) -->
-                <div class="editorial-grid reveal-on-scroll fade-up">
-                    
-                    <!-- Item 1: Large Vertical Focus (lensa-1) -->
-                    <div class="editorial-item item-large" data-img-src="lensa-1.jpg" data-img-alt="Lensa Shafa - Momen Umroh Unggulan 1">
-                        <div class="editorial-img-wrapper">
-                            <img src="lensa-1.jpg" alt="Lensa Shafa - Momen Umroh Unggulan 1" class="editorial-img lazy-img" loading="lazy">
-                            <div class="editorial-overlay">
-                                <div class="editorial-info">
-                                    <span class="editorial-category">Momen Khusyuk</span>
-                                    <h3 class="editorial-title">Keheningan Tawaf</h3>
-                                </div>
-                                <span class="editorial-zoom-btn">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Video Card 1 — lensa-1 -->
+                    <div class="video-card" data-video-id="16SA1xF3f8XVt5phI1Uzo1HAfAUzuTBKM" data-video-title="Momen Tawaf — Masjidil Haram">
+                        <div class="video-card-thumb">
+                            <img src="lensa-1.jpg" alt="Video Sinematik Lensa Shafa 1" class="video-thumb-img">
+                            <div class="video-card-overlay">
+                                <div class="play-btn-circle">
+                                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
                                     </svg>
-                                </span>
+                                </div>
                             </div>
+                        </div>
+                        <div class="video-card-info">
+                            <h3 class="video-card-title">Momen Tawaf</h3>
+                            <p class="video-card-loc">Masjidil Haram, Mekkah</p>
                         </div>
                     </div>
 
-                    <!-- Item 2: Medium Horizontal/Square (lensa-2) -->
-                    <div class="editorial-item item-normal" data-img-src="lensa-2.jpg" data-img-alt="Lensa Shafa - Momen Umroh Unggulan 2">
-                        <div class="editorial-img-wrapper">
-                            <img src="lensa-2.jpg" alt="Lensa Shafa - Momen Umroh Unggulan 2" class="editorial-img lazy-img" loading="lazy">
-                            <div class="editorial-overlay">
-                                <div class="editorial-info">
-                                    <span class="editorial-category">Latar Harom</span>
-                                    <h3 class="editorial-title">Pandangan Menuju Ka'bah</h3>
-                                </div>
-                                <span class="editorial-zoom-btn">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Video Card 2 — lensa-7 -->
+                    <div class="video-card" data-video-id="1-q0xlZMKOTXZ3tZmTaE6JLIB8AzSRhR5" data-video-title="Ketenangan Nabawi — Madinah">
+                        <div class="video-card-thumb">
+                            <img src="lensa-7.jpg" alt="Video Sinematik Lensa Shafa 7" class="video-thumb-img">
+                            <div class="video-card-overlay">
+                                <div class="play-btn-circle">
+                                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
                                     </svg>
-                                </span>
+                                </div>
                             </div>
+                        </div>
+                        <div class="video-card-info">
+                            <h3 class="video-card-title">Ketenangan Nabawi</h3>
+                            <p class="video-card-loc">Masjid Nabawi, Madinah</p>
                         </div>
                     </div>
 
-                    <!-- Item 3: Medium Vertical (lensa-3) -->
-                    <div class="editorial-item item-normal" data-img-src="lensa-3.jpg" data-img-alt="Lensa Shafa - Momen Umroh Unggulan 3">
-                        <div class="editorial-img-wrapper">
-                            <img src="lensa-3.jpg" alt="Lensa Shafa - Momen Umroh Unggulan 3" class="editorial-img lazy-img" loading="lazy">
-                            <div class="editorial-overlay">
-                                <div class="editorial-info">
-                                    <span class="editorial-category">Detail Estetis</span>
-                                    <h3 class="editorial-title">Langkah di Tanah Suci</h3>
-                                </div>
-                                <span class="editorial-zoom-btn">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Video Card 3 — lensa-9 -->
+                    <div class="video-card" data-video-id="1MUU2sg_5cq5yTvj-L8KC0kKryOs2_cui" data-video-title="Keagungan Tanah Suci">
+                        <div class="video-card-thumb">
+                            <img src="lensa-9.jpg" alt="Video Sinematik Lensa Shafa 9" class="video-thumb-img">
+                            <div class="video-card-overlay">
+                                <div class="play-btn-circle">
+                                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
                                     </svg>
-                                </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Item 4: Large Wide (lensa-4) -->
-                    <div class="editorial-item item-wide" data-img-src="lensa-4.jpg" data-img-alt="Lensa Shafa - Momen Umroh Unggulan 4">
-                        <div class="editorial-img-wrapper">
-                            <img src="lensa-4.jpg" alt="Lensa Shafa - Momen Umroh Unggulan 4" class="editorial-img lazy-img" loading="lazy">
-                            <div class="editorial-overlay">
-                                <div class="editorial-info">
-                                    <span class="editorial-category">Kebersamaan</span>
-                                    <h3 class="editorial-title">Keluarga Dalam Doa</h3>
-                                </div>
-                                <span class="editorial-zoom-btn">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 5: Medium tall (lensa-5) -->
-                    <div class="editorial-item item-normal" data-img-src="lensa-5.jpg" data-img-alt="Lensa Shafa - Momen Umroh Unggulan 5">
-                        <div class="editorial-img-wrapper">
-                            <img src="lensa-5.jpg" alt="Lensa Shafa - Momen Umroh Unggulan 5" class="editorial-img lazy-img" loading="lazy">
-                            <div class="editorial-overlay">
-                                <div class="editorial-info">
-                                    <span class="editorial-category">Arsitektur</span>
-                                    <h3 class="editorial-title">Masjidil Haram</h3>
-                                </div>
-                                <span class="editorial-zoom-btn">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                            </div>
+                        <div class="video-card-info">
+                            <h3 class="video-card-title">Keagungan Tanah Suci</h3>
+                            <p class="video-card-loc">Haramain, Arab Saudi</p>
                         </div>
                     </div>
 
@@ -371,128 +287,143 @@
             </div>
         </section>
 
-        <!-- SECTION 5 – GALERI DOKUMENTASI -->
+        <!-- SECTION 5 – PRICELIST -->
+        <section id="pricelist" class="pricelist-section section-padding section-with-bg">
+            <div class="section-bg-wrapper"><div class="section-overlay"></div></div>
+            <div class="container section-content">
+                <div class="section-header text-center reveal-on-scroll fade-up">
+                    <span class="section-badge">PAKET & HARGA</span>
+                    <h2 class="section-title">Pricelist LENSA SHAFA</h2>
+                    <p class="section-subtitle">Khusus Haramain (Mekkah & Madinah) • Tersedia paket Photo, Cinematic & Video</p>
+                </div>
+
+                <!-- Pricelist Image Asli -->
+                <div class="pricelist-image-wrapper reveal-on-scroll fade-up">
+                    <img src="pricelist.png" alt="Pricelist Lensa Shafa" class="pricelist-image">
+                </div>
+
+                <!-- Service Type Tabs -->
+                <div class="pricelist-tags reveal-on-scroll fade-up">
+                    <button class="price-tag" onclick="scrollToCards('single')">📷 PHOTO</button>
+                    <button class="price-tag price-tag-highlight" onclick="scrollToCards('couple')">🎬 CINEMATIC</button>
+                    <button class="price-tag" onclick="scrollToCards('family')">🎥 VIDEO</button>
+                </div>
+                <p style="text-align:center; font-family:var(--font-body); font-size:0.8rem; color:var(--color-medium-gray); margin-bottom:2.5rem; margin-top:-1rem;">Pilih paket sesuai kebutuhanmu</p>
+
+                <div id="price-cards-section" class="price-cards-grid reveal-on-scroll fade-up">
+                    <!-- Single Package -->
+                    <div class="price-card" id="price-single">
+                        <div class="price-card-header">
+                            <h3 class="price-package-name">Single Package</h3>
+                            <div class="price-amount">400 <span class="price-currency">SAR</span></div>
+                        </div>
+                        <ul class="price-features">
+                            <li><span class="price-check">✓</span> 90 Menit</li>
+                            <li><span class="price-check">✓</span> Spot Viral</li>
+                            <li><span class="price-check">✓</span> Arahan Gaya</li>
+                            <li><span class="price-check">✓</span> Online Gallery</li>
+                            <li><span class="price-check">✓</span> Hasil Editan</li>
+                        </ul>
+                        <a href="https://wa.me/6287870455572?text=Halo%20Lensa%20Shafa%2C%20saya%20tertarik%20dengan%20Single%20Package%20400%20SAR" target="_blank" rel="noopener noreferrer" class="btn btn-price">Pesan Sekarang</a>
+                    </div>
+
+                    <!-- Couple Package -->
+                    <div class="price-card price-card-featured" id="price-couple">
+                        <div class="price-card-badge">POPULER</div>
+                        <div class="price-card-header">
+                            <h3 class="price-package-name">Couple Package</h3>
+                            <div class="price-amount">600 <span class="price-currency">SAR</span></div>
+                        </div>
+                        <ul class="price-features">
+                            <li><span class="price-check">✓</span> 90 Menit</li>
+                            <li><span class="price-check">✓</span> Spot Viral</li>
+                            <li><span class="price-check">✓</span> Arahan Gaya</li>
+                            <li><span class="price-check">✓</span> Online Gallery</li>
+                            <li><span class="price-check">✓</span> Hasil Editan</li>
+                        </ul>
+                        <a href="https://wa.me/6287870455572?text=Halo%20Lensa%20Shafa%2C%20saya%20tertarik%20dengan%20Couple%20Package%20600%20SAR" target="_blank" rel="noopener noreferrer" class="btn btn-price btn-price-featured">Pesan Sekarang</a>
+                    </div>
+
+                    <!-- Family Package -->
+                    <div class="price-card" id="price-family">
+                        <div class="price-card-header">
+                            <h3 class="price-package-name">Family Package</h3>
+                            <div class="price-amount">1000 <span class="price-currency">SAR</span></div>
+                        </div>
+                        <ul class="price-features">
+                            <li><span class="price-check">✓</span> 120 Menit</li>
+                            <li><span class="price-check">✓</span> Spot Viral</li>
+                            <li><span class="price-check">✓</span> Arahan Gaya</li>
+                            <li><span class="price-check">✓</span> Online Gallery</li>
+                            <li><span class="price-check">✓</span> Hasil Editan</li>
+                        </ul>
+                        <a href="https://wa.me/6287870455572?text=Halo%20Lensa%20Shafa%2C%20saya%20tertarik%20dengan%20Family%20Package%201000%20SAR" target="_blank" rel="noopener noreferrer" class="btn btn-price">Pesan Sekarang</a>
+                    </div>
+                </div>
+
+                <p class="price-note reveal-on-scroll fade-up">* Harga dapat berubah sewaktu-waktu. Hubungi admin untuk info terbaru dan paket custom.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 6 – GALERI FOTO (tanpa lensa-1, lensa-5, lensa-7, lensa-9 karena sudah jadi video cover) -->
         <section id="galeri-semua" class="gallery-section section-padding section-with-bg">
-            <div class="section-bg-wrapper">
-                <div class="section-overlay"></div>
-            </div>
+            <div class="section-bg-wrapper"><div class="section-overlay"></div></div>
             <div class="container section-content">
                 <div class="section-header text-center reveal-on-scroll fade-up">
-                    <span class="section-badge">GALERI PRODUKSI</span>
+                    <span class="section-badge">GALERI FOTO</span>
                     <h2 class="section-title">Frame-Frame Sinematik Kami</h2>
-                    <p class="section-subtitle">Setiap frame adalah satu detik dari kisah ibadah yang kami abadikan. Klik untuk memperbesar dan rasakan kualitas sinematiknya.</p>
+                    <p class="section-subtitle">Setiap frame adalah satu momen berharga. Klik untuk memperbesar.</p>
                 </div>
-
-                <!-- Complete Gallery Grid (All 11 assets) -->
+                <!-- Gallery 3 columns, lensa-1/5/7/9 removed -->
                 <div class="gallery-grid reveal-on-scroll fade-up">
-                    
-                    <!-- Foto 1 -->
-                    <div class="gallery-card-item" data-index="0" data-img-src="lensa-1.jpg" data-img-alt="Galeri Lensa Shafa 1">
-                        <div class="gallery-img-container">
-                            <img src="lensa-1.jpg" alt="Galeri Lensa Shafa 1" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Foto 2 -->
-                    <div class="gallery-card-item" data-index="1" data-img-src="lensa-2.jpg" data-img-alt="Galeri Lensa Shafa 2">
+                    <div class="gallery-card-item" data-index="0" data-img-src="lensa-2.jpg">
                         <div class="gallery-img-container">
                             <img src="lensa-2.jpg" alt="Galeri Lensa Shafa 2" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
+                            <div class="gallery-hover-overlay"><span class="view-icon-span">+</span></div>
                         </div>
                     </div>
 
-                    <!-- Foto 3 -->
-                    <div class="gallery-card-item" data-index="2" data-img-src="lensa-3.jpg" data-img-alt="Galeri Lensa Shafa 3">
+                    <div class="gallery-card-item" data-index="1" data-img-src="lensa-3.jpg">
                         <div class="gallery-img-container">
                             <img src="lensa-3.jpg" alt="Galeri Lensa Shafa 3" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
+                            <div class="gallery-hover-overlay"><span class="view-icon-span">+</span></div>
                         </div>
                     </div>
 
-                    <!-- Foto 4 -->
-                    <div class="gallery-card-item" data-index="3" data-img-src="lensa-4.jpg" data-img-alt="Galeri Lensa Shafa 4">
+                    <div class="gallery-card-item" data-index="2" data-img-src="lensa-4.jpg">
                         <div class="gallery-img-container">
                             <img src="lensa-4.jpg" alt="Galeri Lensa Shafa 4" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
+                            <div class="gallery-hover-overlay"><span class="view-icon-span">+</span></div>
                         </div>
                     </div>
 
-                    <!-- Foto 5 -->
-                    <div class="gallery-card-item" data-index="4" data-img-src="lensa-5.jpg" data-img-alt="Galeri Lensa Shafa 5">
-                        <div class="gallery-img-container">
-                            <img src="lensa-5.jpg" alt="Galeri Lensa Shafa 5" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Foto 6 -->
-                    <div class="gallery-card-item" data-index="5" data-img-src="lensa-6.jpg" data-img-alt="Galeri Lensa Shafa 6">
+                    <div class="gallery-card-item" data-index="3" data-img-src="lensa-6.jpg">
                         <div class="gallery-img-container">
                             <img src="lensa-6.jpg" alt="Galeri Lensa Shafa 6" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
+                            <div class="gallery-hover-overlay"><span class="view-icon-span">+</span></div>
                         </div>
                     </div>
 
-                    <!-- Foto 7 -->
-                    <div class="gallery-card-item" data-index="6" data-img-src="lensa-7.jpg" data-img-alt="Galeri Lensa Shafa 7">
-                        <div class="gallery-img-container">
-                            <img src="lensa-7.jpg" alt="Galeri Lensa Shafa 7" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Foto 8 -->
-                    <div class="gallery-card-item" data-index="7" data-img-src="lensa-8.jpg" data-img-alt="Galeri Lensa Shafa 8">
+                    <div class="gallery-card-item" data-index="4" data-img-src="lensa-8.jpg">
                         <div class="gallery-img-container">
                             <img src="lensa-8.jpg" alt="Galeri Lensa Shafa 8" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
+                            <div class="gallery-hover-overlay"><span class="view-icon-span">+</span></div>
                         </div>
                     </div>
 
-                    <!-- Foto 9 -->
-                    <div class="gallery-card-item" data-index="8" data-img-src="lensa-9.jpg" data-img-alt="Galeri Lensa Shafa 9">
-                        <div class="gallery-img-container">
-                            <img src="lensa-9.jpg" alt="Galeri Lensa Shafa 9" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Foto 10 -->
-                    <div class="gallery-card-item" data-index="9" data-img-src="lensa-10.jpg" data-img-alt="Galeri Lensa Shafa 10">
+                    <div class="gallery-card-item" data-index="5" data-img-src="lensa-10.jpg">
                         <div class="gallery-img-container">
                             <img src="lensa-10.jpg" alt="Galeri Lensa Shafa 10" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
+                            <div class="gallery-hover-overlay"><span class="view-icon-span">+</span></div>
                         </div>
                     </div>
 
-                    <!-- Foto 11 (PNG file) -->
-                    <div class="gallery-card-item" data-index="10" data-img-src="lensa-11.png" data-img-alt="Galeri Lensa Shafa 11">
-                        <div class="gallery-img-container">
+                    <!-- lensa-11: full-width landscape (baris terakhir galeri) -->
+                    <div class="gallery-card-item gallery-item-wide" data-index="6" data-img-src="lensa-11.png">
+                        <div class="gallery-img-container gallery-img-landscape">
                             <img src="lensa-11.png" alt="Galeri Lensa Shafa 11" class="gallery-img lazy-img" loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="view-icon-span">+</span>
-                            </div>
+                            <div class="gallery-hover-overlay"><span class="view-icon-span">+</span></div>
                         </div>
                     </div>
 
@@ -500,27 +431,23 @@
             </div>
         </section>
 
-        <!-- SECTION 6 – CALL TO ACTION -->
+        <!-- SECTION 7 – CTA -->
         <section class="cta-section section-padding section-with-bg">
-            <div class="section-bg-wrapper">
-                <div class="section-overlay"></div>
-            </div>
+            <div class="section-bg-wrapper"><div class="section-overlay"></div></div>
             <div class="container section-content">
                 <div class="grid grid-2-col">
                     <div class="cta-text-col reveal-on-scroll fade-left">
                         <h2 class="cta-title">Siap Memiliki Film Sinematik Perjalanan Umroh Anda?</h2>
-                        <p class="cta-subtitle" style="margin-bottom: 3.5rem;">Hubungi kami sekarang dan kami akan merekam setiap momen berharga perjalanan spiritual Anda menjadi sebuah film yang layak dikenang seumur hidup.</p>
+                        <p class="cta-subtitle" style="margin-bottom: 3.5rem;">Hubungi kami sekarang untuk mendapatkan paket video sinematik atau foto profesional terbaik untuk perjalanan ibadah Anda.</p>
                         <div class="cta-actions">
                             <a href="https://wa.me/6287870455572" target="_blank" rel="noopener noreferrer" class="btn btn-large-cta">
-                                Tanya Paket Video Sekarang
+                                Tanya Paket Sekarang
                                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="cta-arrow">
                                     <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </a>
                         </div>
                     </div>
-                    
-                    <!-- Foreground visual CTA photo (Issue 4) -->
                     <div class="cta-visual-col reveal-on-scroll fade-right">
                         <div class="cta-image-wrapper">
                             <img src="lensa-8.jpg" alt="Momen Indah Umroh Lensa Shafa" class="cta-fg-image">
@@ -530,29 +457,23 @@
             </div>
         </section>
 
-        <!-- SECTION 7 – KONTAK (Integrated Layout: PHOTO | TEXT) -->
+        <!-- SECTION 8 – KONTAK -->
         <section id="kontak" class="contact-section section-padding section-with-bg">
-            <div class="section-bg-wrapper">
-                <div class="section-overlay"></div>
-            </div>
+            <div class="section-bg-wrapper"><div class="section-overlay"></div></div>
             <div class="container section-content">
                 <div class="grid grid-2-col">
-                    <!-- Foreground visual contact photo (Issue 4) -->
                     <div class="contact-visual-col reveal-on-scroll fade-left">
                         <div class="premium-image-frame">
                             <img src="lensa-10.jpg" alt="Momen Dokumentasi Lensa Shafa" class="contact-fg-image">
                             <div class="frame-border"></div>
                         </div>
                     </div>
-                    
                     <div class="contact-content-col reveal-on-scroll fade-right">
                         <span class="section-badge">KONTAK & INFORMASI</span>
                         <h2 class="section-title">Mari Wujudkan Film Ibadah Anda</h2>
                         <p class="contact-notice">
-                            Paket video sinematik tersedia sesuai kebutuhan. Konsultasi gratis untuk mengetahui paket terbaik bagi perjalanan Umroh Anda.
+                            Paket video sinematik & foto tersedia sesuai kebutuhan. Konsultasi gratis untuk mengetahui paket terbaik bagi perjalanan Umroh Anda.
                         </p>
-                        
-                        <!-- Main WhatsApp Conversion Button -->
                         <div class="contact-cta-wrapper">
                             <a href="https://wa.me/6287870455572" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-large">
                                 <svg class="whatsapp-large-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
@@ -561,32 +482,26 @@
                                 Hubungi Admin Via WhatsApp
                             </a>
                         </div>
-                        
-                        <!-- Social Channels Grid -->
                         <div class="contact-info-grid">
                             <a href="https://wa.me/6287870455572" target="_blank" rel="noopener noreferrer" class="info-link">
                                 <span class="info-icon">
                                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                                        <path d="M12.004 22a9.948 9.948 0 0 1-5.074-1.39l-.364-.216-3.764 1.004.996-3.764-.236-.364A9.954 9.954 0 0 1 2.004 12c0-5.524 4.478-10 10-10s10 4.476 10 10-4.478 10-10 10zM12.008.01C5.397.01.06 5.348.057 11.954c0 2.097.546 4.142 1.587 5.946L.057 24l6.302-1.654a11.966 11.966 0 0 0 5.724 1.457c6.613 0 11.95-5.34 11.953-11.997a11.97 11.97 0 0 0-3.505-8.484A11.965 11.965 0 0 0 12.008.01z"/>
+                                        <path d="M12.004 22a9.948 9.948 0 0 1-5.074-1.39l-.364-.216-3.764 1.004.996-3.764-.236-.364A9.954 9.954 0 0 1 2.004 12c0-5.524 4.478-10 10-10s10 4.476 10 10-4.478 10-10 10z"/>
                                     </svg>
                                 </span>
                                 +62 878-7045-5572
                             </a>
-                            
                             <a href="https://www.instagram.com/lensashafa" target="_blank" rel="noopener noreferrer" class="info-link">
                                 <span class="info-icon">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                                     </svg>
                                 </span>
                                 @lensashafa
                             </a>
-                            
                             <a href="https://www.tiktok.com/@rais._siregar" target="_blank" rel="noopener noreferrer" class="info-link">
                                 <span class="info-icon">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
                                         <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
                                     </svg>
                                 </span>
@@ -600,7 +515,7 @@
 
     </main>
 
-    <!-- Footer Copyright -->
+    <!-- Footer -->
     <footer class="footer-bottom">
         <div class="container text-center">
             <h3 class="footer-brand">LENSA SHAFA</h3>
@@ -608,10 +523,10 @@
         </div>
     </footer>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Galeri Pembesar Foto">
+    <!-- Lightbox Modal (untuk galeri foto) -->
+    <div id="lightbox" class="lightbox-modal" aria-hidden="true" role="dialog">
         <button class="lightbox-close" aria-label="Tutup Galeri">&times;</button>
-        <button class="lightbox-prev" aria-label="Foto Sebelumnya" style="display: flex; align-items: center; justify-content: center;">
+        <button class="lightbox-prev" aria-label="Foto Sebelumnya" style="display:flex;align-items:center;justify-content:center;">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -619,17 +534,53 @@
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Perbesaran Foto Portofolio">
         </div>
-        <button class="lightbox-next" aria-label="Foto Selanjutnya" style="display: flex; align-items: center; justify-content: center;">
+        <button class="lightbox-next" aria-label="Foto Selanjutnya" style="display:flex;align-items:center;justify-content:center;">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
     </div>
 
+    <!-- Video Modal (untuk video sinematik Google Drive) -->
+    <div id="video-modal" class="video-modal" aria-hidden="true" role="dialog">
+        <div class="video-modal-backdrop" id="video-modal-backdrop"></div>
+        <div class="video-modal-container">
+            <div class="video-modal-header">
+                <h3 class="video-modal-title" id="video-modal-title">Video Sinematik</h3>
+                <button class="video-modal-close" id="video-modal-close" aria-label="Tutup Video">&times;</button>
+            </div>
+            <div class="video-modal-body">
+                <div class="video-embed-wrapper">
+                    <iframe id="video-iframe"
+                        src=""
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowfullscreen
+                        frameborder="0"
+                        title="Video Sinematik Lensa Shafa">
+                    </iframe>
+                </div>
+                <div class="video-download-notice">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    Untuk pengalaman yang lebih bagus, disarankan untuk mendownload video
+                </div>
+                <div class="video-modal-actions">
+                    <a id="video-drive-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-white video-download-btn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download / Tonton di Google Drive
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Lenis Smooth Scroll CDN -->
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
     
     <!-- Script JS -->
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>

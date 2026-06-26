@@ -1,3 +1,10 @@
+/* Fungsi global untuk tab pricelist */
+window.scrollToCards = function(target) {
+    const map = { single: 'price-single', couple: 'price-couple', family: 'price-family' };
+    const el = document.getElementById(map[target] || 'price-cards-section');
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================================================
@@ -35,43 +42,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let fadeTimer = null;
 
-    // Fungsi memutar musik dengan efek audio fade-in terjamin (detik 52)
+    // MUSIK FIX DEFINITIF — Tanpa load(), play() langsung dalam gesture context
+    // ROOT CAUSE: bgMusic.load() memutus iOS user gesture chain → play() diblok
     function playAudioWithFadeIn() {
         if (fadeTimer) clearInterval(fadeTimer);
         bgMusic.volume = 0.0;
+        // JANGAN panggil bgMusic.load() — itu yang memutus gesture chain di iOS!
 
+        // play() harus dipanggil langsung di sini (masih dalam gesture callstack)
         bgMusic.play()
             .then(() => {
-                // Seek ke detik 52 setelah play() berhasil (iOS Safari membutuhkan ini)
-                bgMusic.currentTime = 52.0;
-
-                // Tunggu event 'seeked' yang konfirmasi seek benar-benar selesai
-                // sebelum memulai fade-in (cara paling reliable di mobile)
-                let seekConfirmed = false;
-
-                const onSeeked = () => {
-                    bgMusic.removeEventListener('seeked', onSeeked);
-                    if (!seekConfirmed) {
-                        seekConfirmed = true;
-                        startFadeIn();
-                    }
-                };
-
-                bgMusic.addEventListener('seeked', onSeeked);
-
-                // Fallback: jika 'seeked' tidak terpicu dalam 600ms, tetap jalankan
+                // play() berhasil. Sekarang seek ke detik 52.
+                // Beri waktu 1 detik agar audio cukup ter-buffer sebelum seek
                 setTimeout(() => {
-                    bgMusic.removeEventListener('seeked', onSeeked);
-                    if (!seekConfirmed) {
-                        seekConfirmed = true;
-                        // Coba seek sekali lagi sebagai fallback
-                        if (bgMusic.currentTime < 50) bgMusic.currentTime = 52.0;
-                        startFadeIn();
-                    }
-                }, 600);
+                    bgMusic.currentTime = 52.0;
+                    console.log('[Music] Seeking to 52s. readyState=' + bgMusic.readyState);
+
+                    // Verifikasi setelah 500ms lagi
+                    setTimeout(() => {
+                        console.log('[Music] Actual position: ' + Math.round(bgMusic.currentTime) + 's');
+                        if (bgMusic.currentTime < 50) {
+                            // Seek gagal (audio belum cukup buffer), coba lagi
+                            bgMusic.currentTime = 52.0;
+                        }
+                    }, 500);
+
+                    musicToggle.classList.add('playing');
+                    musicStateText.textContent = 'Mute';
+                    musicTooltip.textContent = 'Senapkan Musik';
+                    startFadeIn();
+                }, 1000);
             })
-            .catch(error => {
-                console.log("Autoplay dicegah oleh kebijakan browser:", error);
+            .catch(err => {
+                console.log('[Music] Blocked:', err);
                 musicToggle.classList.remove('playing');
                 musicStateText.textContent = 'Play';
                 musicTooltip.textContent = 'Putar Musik';
@@ -431,12 +434,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     function handleSwipeGesture() {
-        const threshold = 50; // Jarak minimal swipe dalam px
-        if (touchEndX < touchStartX - threshold) {
-            navigateLightbox('next'); // Swipe Kiri -> Foto Selanjutnya
-        }
-        if (touchEndX > touchStartX + threshold) {
-            navigateLightbox('prev'); // Swipe Kanan -> Foto Sebelumnya
-        }
+        const threshold = 50;
+        if (touchEndX < touchStartX - threshold) { navigateLightbox('next'); }
+        if (touchEndX > touchStartX + threshold) { navigateLightbox('prev'); }
     }
+
+    /* ==========================================================================
+       VIDEO MODAL — Google Drive Embed
+       ========================================================================== */
+    const videoModal = document.getElementById('video-modal');
+    const videoIframe = document.getElementById('video-iframe');
+    const videoModalTitle = document.getElementById('video-modal-title');
+    const videoModalClose = document.getElementById('video-modal-close');
+    const videoModalBackdrop = document.getElementById('video-modal-backdrop');
+    const videoDriveLink = document.getElementById('video-drive-link');
+    const videoCards = document.querySelectorAll('.video-card');
+
+    function openVideoModal(videoId, title) {
+        const embedUrl = `https://drive.google.com/file/d/${videoId}/preview`;
+        const driveUrl = `https://drive.google.com/file/d/${videoId}/view`;
+
+        videoIframe.src = embedUrl;
+        videoModalTitle.textContent = title;
+        videoDriveLink.href = driveUrl;
+
+        videoModal.classList.add('open');
+        videoModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('scroll-locked');
+    }
+
+    function closeVideoModal() {
+        videoModal.classList.remove('open');
+        videoModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('scroll-locked');
+        // Hentikan video saat modal ditutup
+        setTimeout(() => { videoIframe.src = ''; }, 400);
+    }
+
+    videoCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const videoId = card.getAttribute('data-video-id');
+            const title = card.getAttribute('data-video-title');
+            if (videoId) openVideoModal(videoId, title);
+        });
+    });
+
+    if (videoModalClose) videoModalClose.addEventListener('click', closeVideoModal);
+    if (videoModalBackdrop) videoModalBackdrop.addEventListener('click', closeVideoModal);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && videoModal.classList.contains('open')) {
+            closeVideoModal();
+        }
+    });
 });
