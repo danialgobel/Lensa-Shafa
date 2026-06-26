@@ -2198,15 +2198,42 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-6px);
 }
 
-.price-card-featured { background-color: var(--color-white); border-color: var(--color-white); }
+.price-card-featured {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.12);
+}
 
 .price-card-featured .price-package-name,
 .price-card-featured .price-amount,
-.price-card-featured .price-currency,
-.price-card-featured .price-features li,
-.price-card-featured .price-check { color: var(--color-black) !important; }
+.price-card-featured .price-currency {
+    color: var(--color-white) !important;
+}
 
-.price-card-featured:hover { box-shadow: 0 20px 60px rgba(255,255,255,0.15); }
+.price-card-featured .price-features li {
+    color: var(--color-text-secondary) !important;
+}
+
+.price-card-featured .price-check {
+    color: var(--color-white) !important;
+}
+
+.price-card-featured:hover {
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.price-card-featured:not(.active) .btn-price-featured {
+    background-color: var(--color-white) !important;
+    color: var(--color-black) !important;
+    border-color: var(--color-white) !important;
+}
+
+.price-card-featured:not(.active) .btn-price-featured:hover {
+    background-color: transparent !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-white) !important;
+}
 
 .price-card-badge {
     position: absolute;
@@ -2325,11 +2352,12 @@ h1, h2, h3, h4, h5, h6 {
     aspect-ratio: 16/7 !important;
 }
 
-/* ========== HIDE SCROLL INDICATOR ON MOBILE ========== */
-@media screen and (max-width: 767px) {
-    .hero-scroll-indicator {
-        display: none !important;
-    }
+/* ========== HIDE SCROLL INDICATOR COMPLETELY (MOBILE & DESKTOP) ========== */
+.hero-scroll-indicator {
+    display: none !important;
+}
+
+@media screen and (max-width: 1024px) {
     .pricelist-image {
         max-width: 100%;
     }
@@ -2343,4 +2371,182 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* ========== CINEMATIC TABS BUG FIX (INVISIBLE TEXT) ========== */
+.price-tag.price-tag-highlight {
+    background-color: var(--color-white) !important;
+    color: var(--color-black) !important;
+    border-color: var(--color-white) !important;
+}
+
+.price-tag.price-tag-highlight:hover {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--color-black) !important;
+}
+
+/* ========== PRICE CARD ACTIVE STATE (CLICKED) ========== */
+.price-card {
+    cursor: pointer;
+}
+
+.price-card.active {
+    background-color: var(--color-white) !important;
+    border-color: var(--color-white) !important;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(255, 255, 255, 0.15) !important;
+}
+
+.price-card.active .price-package-name,
+.price-card.active .price-amount,
+.price-card.active .price-currency,
+.price-card.active .price-features li,
+.price-card.active .price-check {
+    color: var(--color-black) !important;
+}
+
+.price-card.active .btn-price {
+    background-color: var(--color-black) !important;
+    border-color: var(--color-black) !important;
+    color: var(--color-white) !important;
+}
+
+.price-card.active .btn-price:hover {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    color: var(--color-white) !important;
+}
+
+/* ========== PORTRAIT VIDEO MODAL ASPECT RATIO (9:16) ========== */
+.video-modal-container.vertical-video {
+    max-width: 420px; /* Lebar sempit khusus video HP/potret */
+}
+
+.video-modal-container.vertical-video .video-embed-wrapper {
+    aspect-ratio: 9/16 !important;
+}
+
+@media screen and (max-width: 767px) {
+    .video-modal-container.vertical-video {
+        max-width: 320px; /* Batasi lebar maksimal modal portrait di HP */
+    }
+    
+    .video-modal-container.vertical-video .video-embed-wrapper {
+        height: 50vh !important;
+        width: calc(50vh * 9 / 16) !important;
+        margin: 0 auto;
+        aspect-ratio: 9/16 !important;
+    }
+}
+
+/* ========== VIDEO EMBED SPINNER LOADER ========== */
+.video-loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--color-white);
+    animation: spin 1s linear infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ========== PRICELIST FULLSCREEN LIGHTBOX MODAL ========== */
+.pricelist-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.pricelist-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.pricelist-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    cursor: pointer;
+}
+
+.pricelist-modal-container {
+    position: relative;
+    z-index: 1;
+    max-width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricelist-modal.open .pricelist-modal-container {
+    transform: scale(1);
+}
+
+.pricelist-modal-close {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    line-height: 1;
+    z-index: 2;
+}
+
+.pricelist-modal-close:hover {
+    color: var(--color-medium-gray);
+}
+
+.pricelist-modal-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pricelist-modal-img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: zoom-out;
+}
+
+@media screen and (max-width: 767px) {
+    .pricelist-modal-close {
+        top: -40px;
+        right: 10px;
+        font-size: 2.2rem;
+    }
+    .pricelist-modal-img {
+        max-height: 75vh;
+        border-radius: 8px;
+    }
 }

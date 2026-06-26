@@ -40,41 +40,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     });
 
+    // WEBAUDIO API INTEGRATION — Mengatasi limitasi iOS Safari yang mengunci kontrol volume audio via JS.
+    // iOS Safari membolehkan kontrol volume jika dikirim melalui Web Audio API GainNode.
+    let audioCtx = null;
+    let sourceNode = null;
+    let gainNode = null;
+
+    function initWebAudio() {
+        if (audioCtx) return;
+        try {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) {
+                audioCtx = new AudioContextClass();
+                sourceNode = audioCtx.createMediaElementSource(bgMusic);
+                gainNode = audioCtx.createGain();
+                sourceNode.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                console.log('[WebAudio] Graph initialized successfully.');
+            }
+        } catch (e) {
+            console.log('[WebAudio] Initialization failed, using fallback standard volume:', e);
+            audioCtx = null;
+        }
+    }
+
     let fadeTimer = null;
 
-    // MUSIK FIX DEFINITIF — Tanpa load(), play() langsung dalam gesture context
-    // ROOT CAUSE: bgMusic.load() memutus iOS user gesture chain → play() diblok
     function playAudioWithFadeIn() {
         if (fadeTimer) clearInterval(fadeTimer);
-        bgMusic.volume = 0.0;
-        // JANGAN panggil bgMusic.load() — itu yang memutus gesture chain di iOS!
+        
+        initWebAudio();
+        
+        if (audioCtx && gainNode) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        } else {
+            bgMusic.volume = 0.0;
+        }
 
-        // play() harus dipanggil langsung di sini (masih dalam gesture callstack)
         bgMusic.play()
             .then(() => {
-                // play() berhasil. Sekarang seek ke detik 52.
-                // Beri waktu 1 detik agar audio cukup ter-buffer sebelum seek
-                setTimeout(() => {
-                    bgMusic.currentTime = 52.0;
-                    console.log('[Music] Seeking to 52s. readyState=' + bgMusic.readyState);
-
-                    // Verifikasi setelah 500ms lagi
-                    setTimeout(() => {
-                        console.log('[Music] Actual position: ' + Math.round(bgMusic.currentTime) + 's');
-                        if (bgMusic.currentTime < 50) {
-                            // Seek gagal (audio belum cukup buffer), coba lagi
-                            bgMusic.currentTime = 52.0;
-                        }
-                    }, 500);
-
-                    musicToggle.classList.add('playing');
-                    musicStateText.textContent = 'Mute';
-                    musicTooltip.textContent = 'Senapkan Musik';
-                    startFadeIn();
-                }, 1000);
+                console.log('[Music] Playback started successfully.');
+                startFadeIn();
             })
             .catch(err => {
-                console.log('[Music] Blocked:', err);
+                console.log('[Music] Play blocked by user gesture restrictions:', err);
                 musicToggle.classList.remove('playing');
                 musicStateText.textContent = 'Play';
                 musicTooltip.textContent = 'Putar Musik';
@@ -82,63 +94,97 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startFadeIn() {
-        console.log("Audio berjalan dari detik: " + bgMusic.currentTime);
         musicToggle.classList.add('playing');
         musicStateText.textContent = 'Mute';
         musicTooltip.textContent = 'Senapkan Musik';
 
-        const fadeDuration = 4000;
-        const fadeInterval = 50;
         const targetVolume = 0.7;
-        const volumeStep = targetVolume / (fadeDuration / fadeInterval);
-        let currentVolume = 0.0;
+        const fadeDuration = 4000; // 4 Detik fade-in
 
-        fadeTimer = setInterval(() => {
-            currentVolume += volumeStep;
-            if (currentVolume >= targetVolume) {
-                bgMusic.volume = targetVolume;
-                clearInterval(fadeTimer);
-            } else {
-                bgMusic.volume = currentVolume;
+        if (audioCtx && gainNode) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
             }
-        }, fadeInterval);
+            // Linear fade-in menggunakan Web Audio API (Mulus & berfungsi di iOS)
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(targetVolume, audioCtx.currentTime + (fadeDuration / 1000));
+            console.log('[WebAudio] Smooth fade-in started.');
+        } else {
+            // Fallback standard volume untuk browser lama
+            const fadeInterval = 50;
+            const volumeStep = targetVolume / (fadeDuration / fadeInterval);
+            let currentVolume = 0.0;
+            bgMusic.volume = 0.0;
+
+            fadeTimer = setInterval(() => {
+                currentVolume += volumeStep;
+                if (currentVolume >= targetVolume) {
+                    bgMusic.volume = targetVolume;
+                    clearInterval(fadeTimer);
+                } else {
+                    bgMusic.volume = currentVolume;
+                }
+            }, fadeInterval);
+        }
     }
 
-    // Fungsi memudarkan dan menjeda audio secara halus
     function pauseAudioWithFadeOut() {
         if (fadeTimer) clearInterval(fadeTimer);
 
-        const fadeDuration = 600; // Cepat memudar saat pause
-        const fadeInterval = 30;
-        const startVolume = bgMusic.volume;
-        const volumeStep = startVolume / (fadeDuration / fadeInterval);
-        let currentVolume = startVolume;
+        const fadeDuration = 600; // 0.6 detik memudar saat dijeda
 
-        fadeTimer = setInterval(() => {
-            currentVolume -= volumeStep;
-            if (currentVolume <= 0) {
-                bgMusic.volume = 0;
+        if (audioCtx && gainNode) {
+            // Linear fade-out menggunakan Web Audio API
+            gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + (fadeDuration / 1000));
+            
+            setTimeout(() => {
                 bgMusic.pause();
                 musicToggle.classList.remove('playing');
                 musicStateText.textContent = 'Play';
                 musicTooltip.textContent = 'Putar Musik';
-                clearInterval(fadeTimer);
-            } else {
-                bgMusic.volume = currentVolume;
-            }
-        }, fadeInterval);
+            }, fadeDuration);
+        } else {
+            // Fallback standard volume
+            const fadeInterval = 30;
+            const startVolume = bgMusic.volume;
+            const volumeStep = startVolume / (fadeDuration / fadeInterval);
+            let currentVolume = startVolume;
+
+            fadeTimer = setInterval(() => {
+                currentVolume -= volumeStep;
+                if (currentVolume <= 0) {
+                    bgMusic.volume = 0;
+                    bgMusic.pause();
+                    musicToggle.classList.remove('playing');
+                    musicStateText.textContent = 'Play';
+                    musicTooltip.textContent = 'Putar Musik';
+                    clearInterval(fadeTimer);
+                } else {
+                    bgMusic.volume = currentVolume;
+                }
+            }, fadeInterval);
+        }
     }
 
     // Toggle play/pause musik
     musicToggle.addEventListener('click', () => {
+        initWebAudio();
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
         if (bgMusic.paused) {
-            // Mainkan kembali (lanjutkan posisi saat ini)
+            if (gainNode) {
+                gainNode.gain.setValueAtTime(0.7, audioCtx.currentTime);
+            } else {
+                bgMusic.volume = 0.7;
+            }
             bgMusic.play()
                 .then(() => {
                     musicToggle.classList.add('playing');
                     musicStateText.textContent = 'Mute';
                     musicTooltip.textContent = 'Senapkan Musik';
-                    bgMusic.volume = 0.7;
                 });
         } else {
             pauseAudioWithFadeOut();
@@ -297,19 +343,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxPrev = document.querySelector('.lightbox-prev');
     const lightboxNext = document.querySelector('.lightbox-next');
     
-    // Daftar terpadu seluruh 11 gambar portofolio
+    // Daftar terpadu seluruh 7 gambar galeri aktif (lensa-1, 5, 7, 9 dikecualikan)
     const portfolioAssets = [
-        { src: 'lensa-1.jpg', alt: 'Dokumentasi Lensa Shafa 1' },
-        { src: 'lensa-2.jpg', alt: 'Dokumentasi Lensa Shafa 2' },
-        { src: 'lensa-3.jpg', alt: 'Dokumentasi Lensa Shafa 3' },
-        { src: 'lensa-4.jpg', alt: 'Dokumentasi Lensa Shafa 4' },
-        { src: 'lensa-5.jpg', alt: 'Dokumentasi Lensa Shafa 5' },
-        { src: 'lensa-6.jpg', alt: 'Dokumentasi Lensa Shafa 6' },
-        { src: 'lensa-7.jpg', alt: 'Dokumentasi Lensa Shafa 7' },
-        { src: 'lensa-8.jpg', alt: 'Dokumentasi Lensa Shafa 8' },
-        { src: 'lensa-9.jpg', alt: 'Dokumentasi Lensa Shafa 9' },
-        { src: 'lensa-10.jpg', alt: 'Dokumentasi Lensa Shafa 10' },
-        { src: 'lensa-11.png', alt: 'Dokumentasi Lensa Shafa 11' }
+        { src: 'assets/images/lensa-2.jpg', alt: 'Dokumentasi Lensa Shafa 2' },
+        { src: 'assets/images/lensa-3.jpg', alt: 'Dokumentasi Lensa Shafa 3' },
+        { src: 'assets/images/lensa-4.jpg', alt: 'Dokumentasi Lensa Shafa 4' },
+        { src: 'assets/images/lensa-6.jpg', alt: 'Dokumentasi Lensa Shafa 6' },
+        { src: 'assets/images/lensa-8.jpg', alt: 'Dokumentasi Lensa Shafa 8' },
+        { src: 'assets/images/lensa-10.jpg', alt: 'Dokumentasi Lensa Shafa 10' },
+        { src: 'assets/images/lensa-11.png', alt: 'Dokumentasi Lensa Shafa 11' }
     ];
 
     let currentPhotoIndex = 0;
@@ -382,9 +424,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryItems = document.querySelectorAll('.gallery-card-item');
     galleryItems.forEach(item => {
         item.addEventListener('click', () => {
-            const index = parseInt(item.getAttribute('data-index'), 10);
-            if (!isNaN(index)) {
-                openLightbox(index);
+            const imgSrc = item.getAttribute('data-img-src');
+            const matchedIndex = portfolioAssets.findIndex(asset => asset.src === imgSrc);
+            if (matchedIndex !== -1) {
+                openLightbox(matchedIndex);
             }
         });
     });
@@ -448,26 +491,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoModalClose = document.getElementById('video-modal-close');
     const videoModalBackdrop = document.getElementById('video-modal-backdrop');
     const videoDriveLink = document.getElementById('video-drive-link');
+    const videoDownloadLink = document.getElementById('video-download-link');
+    const videoLoadingSpinner = document.querySelector('.video-loading-spinner');
     const videoCards = document.querySelectorAll('.video-card');
 
-    function openVideoModal(videoId, title) {
+    function openVideoModal(videoId, title, ratio) {
         const embedUrl = `https://drive.google.com/file/d/${videoId}/preview`;
-        const driveUrl = `https://drive.google.com/file/d/${videoId}/view`;
+        const viewUrl = `https://drive.google.com/file/d/${videoId}/view?usp=drivesdk`;
+        const downloadUrl = `https://drive.google.com/uc?export=download&id=${videoId}`;
+
+        // Tampilkan loading spinner
+        if (videoLoadingSpinner) videoLoadingSpinner.style.display = 'block';
 
         videoIframe.src = embedUrl;
         videoModalTitle.textContent = title;
-        videoDriveLink.href = driveUrl;
+        if (videoDriveLink) videoDriveLink.href = viewUrl;
+        if (videoDownloadLink) videoDownloadLink.href = downloadUrl;
+
+        // Atur class vertical-video jika video berorientasi portrait
+        const container = videoModal.querySelector('.video-modal-container');
+        if (container) {
+            if (ratio === 'portrait') {
+                container.classList.add('vertical-video');
+            } else {
+                container.classList.remove('vertical-video');
+            }
+        }
 
         videoModal.classList.add('open');
         videoModal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('scroll-locked');
+        if (lenis) lenis.stop();
+    }
+
+    // Hilangkan loading spinner ketika iframe selesai dimuat
+    if (videoIframe) {
+        videoIframe.onload = () => {
+            if (videoLoadingSpinner) videoLoadingSpinner.style.display = 'none';
+        };
     }
 
     function closeVideoModal() {
         videoModal.classList.remove('open');
         videoModal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('scroll-locked');
-        // Hentikan video saat modal ditutup
+        
+        // Hapus scroll-locked hanya jika menu mobile tidak aktif
+        if (!mainNav.classList.contains('open')) {
+            document.body.classList.remove('scroll-locked');
+            if (lenis) lenis.start();
+        }
+        
+        // Hentikan pemutaran video
         setTimeout(() => { videoIframe.src = ''; }, 400);
     }
 
@@ -475,16 +549,78 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('click', () => {
             const videoId = card.getAttribute('data-video-id');
             const title = card.getAttribute('data-video-title');
-            if (videoId) openVideoModal(videoId, title);
+            const ratio = card.getAttribute('data-video-ratio');
+            if (videoId) openVideoModal(videoId, title, ratio);
         });
     });
 
     if (videoModalClose) videoModalClose.addEventListener('click', closeVideoModal);
     if (videoModalBackdrop) videoModalBackdrop.addEventListener('click', closeVideoModal);
 
+
+    /* ==========================================================================
+       7. PRICELIST FULLSCREEN LIGHTBOX MODAL
+       ========================================================================== */
+    const pricelistImg = document.querySelector('.pricelist-image');
+    const pricelistModal = document.getElementById('pricelist-modal');
+    const pricelistModalClose = document.getElementById('pricelist-modal-close');
+    const pricelistModalBackdrop = document.getElementById('pricelist-modal-backdrop');
+
+    function openPricelistModal() {
+        if (!pricelistModal) return;
+        pricelistModal.classList.add('open');
+        pricelistModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('scroll-locked');
+        if (lenis) lenis.stop();
+    }
+
+    function closePricelistModal() {
+        if (!pricelistModal) return;
+        pricelistModal.classList.remove('open');
+        pricelistModal.setAttribute('aria-hidden', 'true');
+        
+        // Hapus scroll-locked hanya jika menu mobile tidak aktif
+        if (!mainNav.classList.contains('open')) {
+            document.body.classList.remove('scroll-locked');
+            if (lenis) lenis.start();
+        }
+    }
+
+    if (pricelistImg) {
+        pricelistImg.style.cursor = 'pointer';
+        pricelistImg.addEventListener('click', openPricelistModal);
+    }
+    if (pricelistModalClose) pricelistModalClose.addEventListener('click', closePricelistModal);
+    if (pricelistModalBackdrop) pricelistModalBackdrop.addEventListener('click', closePricelistModal);
+
+
+    /* ==========================================================================
+       8. PRICE CARD INTERACTIVITY (WHITE ON CLICK)
+       ========================================================================== */
+    const priceCards = document.querySelectorAll('.price-card');
+    priceCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Jangan ubah active state jika yang diklik adalah tombol Pesan Sekarang
+            if (e.target.classList.contains('btn-price')) return;
+
+            const isAlreadyActive = card.classList.contains('active');
+            priceCards.forEach(c => c.classList.remove('active'));
+            
+            if (!isAlreadyActive) {
+                card.classList.add('active');
+            }
+        });
+    });
+
+
+    /* ==========================================================================
+       9. UNIFIED KEYDOWN LISTENER (ESCAPE CLOSE FOR ALL MODALS)
+       ========================================================================== */
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && videoModal.classList.contains('open')) {
-            closeVideoModal();
+        if (e.key === 'Escape') {
+            if (lightbox && lightbox.classList.contains('active')) closeLightbox();
+            if (videoModal && videoModal.classList.contains('open')) closeVideoModal();
+            if (pricelistModal && pricelistModal.classList.contains('open')) closePricelistModal();
         }
     });
 });
